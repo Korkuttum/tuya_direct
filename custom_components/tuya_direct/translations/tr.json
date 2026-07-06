@@ -1,0 +1,66 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "data": {
+                    "access_id": "Access ID",
+                    "access_key": "Access Key",
+                    "device_id": "Cihaz ID",
+                    "region": "Bolge",
+                    "connection_type": "Baglanti Turu"
+                },
+                "description": "Tuya IoT Platform bilgilerinizi girin ve baglanti turunu secin.\n\nCloud, Tuya DP modelini ve durum bilgisini internetten okur. Local, kurulumdan sonra daha hizli guncellemeler icin TinyTuya kullanir.",
+                "title": "Tuya Direct Kurulumu"
+            },
+            "local": {
+                "data": {
+                    "ip": "Cihaz IP Adresi",
+                    "local_key": "Local Key",
+                    "protocol": "Protokol Versiyonu"
+                },
+                "description": "Yerel cihaz baglanti bilgilerini girin.\n\nCihaz Home Assistant ile ayni yerel agda olmalidir.",
+                "title": "Yerel Cihaz Kurulumu"
+            },
+            "cloud_options": {
+                "data": {
+                    "scan_interval": "Yenileme Araligi (dakika)"
+                },
+                "description": "Yenileme araligini ayarlayin.\n\nDusuk degerler daha hizli gunceller ama daha cok Tuya API cagrisi kullanir.",
+                "title": "Cloud Yapilandirmasi"
+            }
+        },
+        "error": {
+            "cannot_connect": "Baglanti basarisiz",
+            "invalid_auth": "Gecersiz kimlik dogrulama",
+            "unknown": "Beklenmeyen hata"
+        },
+        "abort": {
+            "already_configured": "Bu cihaz zaten eklenmis."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "data": {},
+                "description": "Cihaz ayarlarini yapilandirin.",
+                "title": "Tuya Direct Yapilandirmasi"
+            },
+            "cloud_options": {
+                "data": {
+                    "scan_interval": "Yenileme Araligi (dakika)"
+                },
+                "description": "Yenileme araligini ayarlayin.\n\nDusuk degerler daha hizli gunceller ama daha cok Tuya API cagrisi kullanir.",
+                "title": "Cloud Cihaz Ayarlari"
+            },
+            "local_options": {
+                "data": {
+                    "ip": "Cihaz IP Adresi",
+                    "local_key": "Local Key",
+                    "protocol": "Protokol Versiyonu"
+                },
+                "description": "Yerel cihaz baglanti bilgilerini guncelleyin.\n\nCihaz ayni yerel agda olmalidir.",
+                "title": "Yerel Cihaz Ayarlari"
+            }
+        }
+    }
+}
