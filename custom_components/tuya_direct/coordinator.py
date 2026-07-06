@@ -234,15 +234,14 @@ class TuyaScaleDataUpdateCoordinator(DataUpdateCoordinator):
         for dp_str, value in dps.items():
             try:
                 dp_id = int(dp_str)
-                code = self.dp_mapping.get(dp_id)
-                if code:
-                    data[code] = {
-                        'value': value,
-                        'dp_id': dp_id,
-                        'timestamp': current_ms,
-                        'type': str(type(value).__name__),
-                        'last_update': current_str
-                    }
+                code = self.dp_mapping.get(dp_id) or f"dp_{dp_id}"
+                data[code] = {
+                    'value': value,
+                    'dp_id': dp_id,
+                    'timestamp': current_ms,
+                    'type': str(type(value).__name__),
+                    'last_update': current_str
+                }
             except ValueError:
                 continue
       
@@ -657,10 +656,13 @@ class TuyaScaleDataUpdateCoordinator(DataUpdateCoordinator):
                
                 data = {}
                 for prop in properties:
-                    code = prop['code']
+                    dp_id = prop.get('dp_id') or prop.get('dpId') or prop.get('abilityId')
+                    code = prop.get('code') or (f"dp_{dp_id}" if dp_id is not None else None)
+                    if code is None:
+                        continue
                     data[code] = {
-                        'value': prop['value'],
-                        'dp_id': prop.get('dp_id'),
+                        'value': prop.get('value'),
+                        'dp_id': dp_id,
                         'timestamp': prop.get('time', 0),
                         'type': prop.get('type', ''),
                         'last_update': datetime.fromtimestamp(prop.get('time', 0) / 1000).strftime('%Y-%m-%d %H:%M:%S')
@@ -669,7 +671,6 @@ class TuyaScaleDataUpdateCoordinator(DataUpdateCoordinator):
                     # their source without an explicit `raw_source` in
                     # the model file.
                     if prop.get('type') == 'raw':
-                        dp_id = prop.get('dp_id')
                         if dp_id is not None:
                             self.raw_code_by_dp_id[dp_id] = code
                 return data
@@ -729,6 +730,14 @@ class TuyaScaleDataUpdateCoordinator(DataUpdateCoordinator):
             self.model_mapping = create_empty_mapping(self.model_id or "generic")
         self.model_mapping = extend_mapping_from_data(self.model_mapping, self.data)
         self._build_dp_mapping()
+        _LOGGER.info(
+            "Tuya Direct entity mapping: %d sensors, %d binary sensors, %d switches, %d numbers, %d selects",
+            len(self.model_mapping.get("sensors", {})),
+            len(self.model_mapping.get("binary_sensors", {})),
+            len(self.model_mapping.get("switches", {})),
+            len(self.model_mapping.get("numbers", {})),
+            len(self.model_mapping.get("selects", {})),
+        )
 
     @property
     def dp_mapping_dict(self) -> dict:
