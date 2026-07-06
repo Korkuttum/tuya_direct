@@ -1,0 +1,20 @@
+{
+  "domain": "tuya_direct",
+  "name": "Tuya Direct",
+  "codeowners": ["@Korkuttum"],
+  "config_flow": true,
+  "documentation": "https://github.com/Korkuttum/tuya_direct",
+  "integration_type": "device",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/Korkuttum/tuya_direct/issues",
+  "requirements": ["requests>=2.25.0", "tinytuya>=1.15.0"],
+  "version": "2.3.0"
+}
+
+
+
+
+
+
+
+
