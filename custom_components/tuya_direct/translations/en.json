@@ -1,0 +1,66 @@
+{
+    "config": {
+        "step": {
+            "user": {
+                "data": {
+                    "access_id": "Access ID",
+                    "access_key": "Access Key",
+                    "device_id": "Device ID",
+                    "region": "Region",
+                    "connection_type": "Connection Type"
+                },
+                "description": "Enter your Tuya IoT Platform credentials and select the connection type.\n\nCloud reads the Tuya DP model and status from the internet. Local uses TinyTuya for faster updates after setup.",
+                "title": "Tuya Direct Setup"
+            },
+            "local": {
+                "data": {
+                    "ip": "Device IP Address",
+                    "local_key": "Local Key",
+                    "protocol": "Protocol Version"
+                },
+                "description": "Enter local device connection details.\n\nThe device must be on the same local network as Home Assistant.",
+                "title": "Local Device Setup"
+            },
+            "cloud_options": {
+                "data": {
+                    "scan_interval": "Refresh Interval (minutes)"
+                },
+                "description": "Configure the refresh interval.\n\nLower values update faster but use more Tuya API calls.",
+                "title": "Cloud Configuration"
+            }
+        },
+        "error": {
+            "cannot_connect": "Failed to connect",
+            "invalid_auth": "Invalid authentication",
+            "unknown": "Unexpected error"
+        },
+        "abort": {
+            "already_configured": "This device is already configured."
+        }
+    },
+    "options": {
+        "step": {
+            "init": {
+                "data": {},
+                "description": "Configure device settings.",
+                "title": "Tuya Direct Configuration"
+            },
+            "cloud_options": {
+                "data": {
+                    "scan_interval": "Refresh Interval (minutes)"
+                },
+                "description": "Configure the refresh interval.\n\nLower values update faster but use more Tuya API calls.",
+                "title": "Cloud Device Settings"
+            },
+            "local_options": {
+                "data": {
+                    "ip": "Device IP Address",
+                    "local_key": "Local Key",
+                    "protocol": "Protocol Version"
+                },
+                "description": "Update local device connection details.\n\nThe device must be on the same local network.",
+                "title": "Local Device Settings"
+            }
+        }
+    }
+}
